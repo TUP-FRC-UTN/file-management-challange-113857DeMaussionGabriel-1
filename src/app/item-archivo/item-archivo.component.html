@@ -1,0 +1,11 @@
+<span data-bs-toggle="dropdown">
+    <i class="{{obtenerIcono(archivo.data.type)}}"></i> 
+    {{obtenerNombre(archivo.data.name)}}
+    @if (hijos.length > 0) {
+        <ul class="dropdown-menu p-2">
+            @for (child of hijos; track $index) {
+                <li><app-item-archivo [archivo]="child"></app-item-archivo></li>
+            }
+        </ul>
+    }
+</span>

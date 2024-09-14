@@ -1,0 +1,40 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Dueños</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (file of listadoMuestra; track $index) {
+        <tr>
+            <th> <input class="form-check-input" type="checkbox" [(ngModel)]="file.checked" id="flexCheckDefault"> </th>
+            <td> <app-item-archivo [archivo]="file" [hijos]="getChilds(file)"></app-item-archivo> </td>
+            <td> {{file.data.creation | date: "MMM dd, yyyy"}} </td>
+            <td>
+                @if (file.data.owners.length > 3) {
+                <span class="d-inline-flex align-items-center">
+                    @for (owner of file.data.owners.slice(0, 3); track $index) {
+                    <img src="{{owner.avatarUrl}}" alt="" style="height: 30px; width: 30px; border-radius: 500px;">
+                    }
+                    <span
+                        style="display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 100%; background-color: cadetblue;">
+                        +{{file.data.owners.length - 3}}
+                    </span>
+                </span>
+                }
+                @else {
+                @for (owner of file.data.owners; track $index) {
+                <img src="{{owner.avatarUrl}}" alt="" style="height: 30px; width: 30px; border-radius: 500px;">
+                }
+                }
+
+            </td>
+        </tr>
+        }
+
+
+    </tbody>
+</table>
